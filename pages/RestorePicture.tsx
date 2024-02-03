@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { UploadDropzone } from "react-uploader";
-import { Uploader } from "uploader";
+import { Uploader, UploadWidgetResult } from "uploader";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import appendNewToName from "../utils/appendNewToName";
@@ -55,15 +55,6 @@ export default function RestorePicture() {
     if (res.status === 200) setFixedUrl(newPhoto);
   }
 
-  const uploadFile = (uploadedFile: FileInfo[]) => {
-    if (!uploadedFile.length) return;
-
-    const file = uploadedFile[0].originalFile;
-    setPhotoName(file.originalFileName);
-    setOriginalUrl(file.fileUrl.replace("raw", "thumbnail"));
-    generatePhoto(file.fileUrl.replace("raw", "thumbnail"));
-  };
-
   return (
     <div className="w-full flex-1 flex flex-col items-center box-border pt-12">
       <ResizablePanel>
@@ -103,9 +94,12 @@ export default function RestorePicture() {
               <UploadDropzone
                 uploader={uploaderConfig}
                 options={uploaderOptions}
-                onUpdate={(uploadedFile: FileInfo[]) =>
-                  uploadFile(uploadedFile)
-                }
+                onUpdate={(files: UploadWidgetResult[]) => {
+                  if (!files.length) return;
+                  setPhotoName(files[0].originalFile.originalFileName);
+                  setOriginalUrl(files[0].fileUrl.replace("raw", "thumbnail"));
+                  generatePhoto(files[0].fileUrl.replace("raw", "thumbnail"));
+                }}
                 width="670px"
                 height="250px"
               />
