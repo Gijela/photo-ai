@@ -12,15 +12,8 @@ import {
   ReactCompareSlider,
   ReactCompareSliderImage,
 } from "react-compare-slider";
-
-type OriginalFile = {
-  originalFileName: string;
-  fileUrl: string;
-};
-
-type FileInfo = {
-  originalFile: OriginalFile;
-};
+import { Button, Col, Row } from "antd";
+import PhotoCompareSlider from "../components/PhotoCompareSlider";
 
 const uploaderConfig = Uploader({
   apiKey: !!process.env.NEXT_PUBLIC_UPLOAD_API_KEY
@@ -56,79 +49,114 @@ export default function RestorePicture() {
   }
 
   return (
-    <div className="w-full flex-1 flex flex-col items-center box-border pt-12">
-      <ResizablePanel>
-        <AnimatePresence mode="wait">
-          <motion.div className="w-full flex flex-col justify-between items-center">
-            {/* 按钮区域 */}
-            <div className="flex space-x-2 justify-center mb-5">
-              {originalUrl && (
-                <button
-                  onClick={() => {
-                    setOriginalUrl(null);
-                    setFixedUrl(null);
-                  }}
-                  className="bg-black rounded-full text-white font-medium px-4 py-2 hover:bg-black/80 transition"
-                >
-                  上传新图片
-                </button>
-              )}
-              {fixedUrl && (
-                <button
-                  onClick={() => {
-                    downloadPhoto(fixedUrl, appendNewToName(photoName!));
-                  }}
-                  className="bg-white rounded-full text-black border font-medium px-4 py-2 hover:bg-gray-100 transition"
-                >
-                  下载图片
-                </button>
-              )}
-            </div>
+    <Row justify={"center"} style={{ minHeight: "35rem" }}>
+      <Col
+        lg={10}
+        sm={20}
+        xs={20}
+        className="text-center pt-10 lg:text-left lg:pt-20"
+      >
+        <h1 className="font-bold text-4xl">
+          AI 图片修复
+          <br />
+          <span className="inline-block mt-2" style={{ color: "#5555ff" }}>
+            一键免费修复图片
+          </span>
+        </h1>
+        <p className="mt-4 text-base">
+          <span style={{ color: "#8C8B99" }}>
+            基于腾讯出品的 AI 模型 GFPGAN
+            进行图片修复，只需上传图片即可体验模糊图片秒变清晰。——对人脸图像有奇效
+          </span>
+        </p>
 
-            {/*
-              1）没有原始图片就显示上传控件，
-              2）有原始图片但没有修复后的图片，显示原始图片 + 蒙层 + loading
-              3) 二则都有，显示前后图片对比
-            */}
-            {!originalUrl ? (
-              <UploadDropzone
-                uploader={uploaderConfig}
-                options={uploaderOptions}
-                onUpdate={(files: UploadWidgetResult[]) => {
-                  if (!files.length) return;
-                  setPhotoName(files[0].originalFile.originalFileName);
-                  setOriginalUrl(files[0].fileUrl.replace("raw", "thumbnail"));
-                  generatePhoto(files[0].fileUrl.replace("raw", "thumbnail"));
+        <Row className="mt-4 lg:mt-10">
+          {originalUrl ? (
+            <div className="flex flex-wrap justify-center lg:flex-nowrap lg:justify-start">
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOriginalUrl(null);
+                  setFixedUrl(null);
                 }}
-                width="670px"
-                height="250px"
-              />
-            ) : !fixedUrl ? (
-              <div className="relative">
-                <Image
-                  src={originalUrl}
-                  className="rounded-2xl"
-                  alt="original photo"
-                  width={475}
-                  height={475}
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-2xl">
-                  <span className="text-white font-medium">
-                    修复中
-                    <LoadingDots color="white" style="large" />
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <ReactCompareSlider
-                itemOne={<ReactCompareSliderImage src={originalUrl!} />}
-                itemTwo={<ReactCompareSliderImage src={fixedUrl} />}
-                className="flex w-[475px]"
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </ResizablePanel>
-    </div>
+                ghost
+                className="w-64 lg:w-56 h-12 ls:h-16 text-xl rounded-full font-medium mt-4 lg:mt-0"
+              >
+                上传新图片
+              </Button>
+              <Button
+                disabled={!fixedUrl}
+                type="primary"
+                onClick={() => {
+                  downloadPhoto(fixedUrl!, appendNewToName(photoName!));
+                }}
+                ghost
+                className="w-64 lg:w-56 h-12 ls:h-16 text-xl rounded-full font-medium mt-4 lg:mt-0 lg:ml-4"
+              >
+                下载图片
+              </Button>
+            </div>
+          ) : (
+            <ResizablePanel>
+              <AnimatePresence mode="wait">
+                <motion.div className="w-full flex justify-center">
+                  <UploadDropzone
+                    uploader={uploaderConfig}
+                    options={uploaderOptions}
+                    onUpdate={(files: UploadWidgetResult[]) => {
+                      if (!files.length) return;
+                      setPhotoName(files[0].originalFile.originalFileName);
+                      setOriginalUrl(
+                        files[0].fileUrl.replace("raw", "thumbnail")
+                      );
+                      generatePhoto(
+                        files[0].fileUrl.replace("raw", "thumbnail")
+                      );
+                    }}
+                    width="670px"
+                    height="250px"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </ResizablePanel>
+          )}
+        </Row>
+      </Col>
+      <Col
+        lg={10}
+        sm={20}
+        xs={20}
+        className="flex justify-end items-center p-5 mt-4 lg:mt-0"
+      >
+        {!originalUrl ? (
+          <PhotoCompareSlider
+            originalUrl="/sample-originalPhoto.jpeg"
+            fixedUrl="/sample-fixedPhoto.jpeg"
+          />
+        ) : !fixedUrl ? (
+          <div className="relative">
+            <Image
+              src={originalUrl}
+              className="rounded-2xl"
+              alt="original photo"
+              width={475}
+              height={475}
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-2xl">
+              <span className="text-white font-medium">
+                安全检测已通过，图片修复中
+                <LoadingDots color="white" style="large" />
+              </span>
+            </div>
+          </div>
+        ) : (
+          <ReactCompareSlider
+            itemOne={<ReactCompareSliderImage src={originalUrl} />}
+            itemTwo={<ReactCompareSliderImage src={fixedUrl} />}
+            className="flex w-[475px]"
+          />
+        )}
+      </Col>
+    </Row>
   );
 }
