@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@bytescale/upload-widget-react':
+    specifier: ^4.18.0
+    version: 4.18.0(react@18.2.0)
   '@headlessui/react':
     specifier: ^1.7.7
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
+  '@heroicons/react':
+    specifier: ^2.1.1
+    version: 2.1.1(react@18.2.0)
   '@tensorflow/tfjs':
     specifier: ^3.21.0
     version: 3.21.0(seedrandom@3.0.5)
@@ -138,6 +144,28 @@ packages:
       regenerator-runtime: 0.14.1
     dev: false
 
+  /@bytescale/sdk@3.31.1:
+    resolution: {integrity: sha512-HQX47gQjRJgFX/Wu8tFmLgUlQSww9RdCfHL6qi0/6B0s/pajjDGuOQb92Bg7m4sJvVm+hzet+dpQKGSCb5cEFQ==}
+    dev: false
+
+  /@bytescale/upload-widget-react@4.18.0(react@18.2.0):
+    resolution: {integrity: sha512-7EX8iBUHQxabdNg7bwLIV4LfHHZG+g+EID9rCfWqO48jOYsmxDiFbJpAWVV5QFpA1py7H6vkNiA+dJI2hoPAow==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      '@bytescale/upload-widget': 4.24.0
+      lodash.isequal: 4.5.0
+      react: 18.2.0
+    dev: false
+
+  /@bytescale/upload-widget@4.24.0:
+    resolution: {integrity: sha512-n8IDXt5saZ1Z4OvBi7PlXUItUn0tq80qDZYCHHLPpP5f/IlYvb8PjHJXTZCA1BIAjlUmlBtCFgVRI26abeYhAQ==}
+    dependencies:
+      '@bytescale/sdk': 3.31.1
+      classnames: 2.5.1
+      preact: 10.19.3
+    dev: false
+
   /@ctrl/tinycolor@3.6.1:
     resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
     engines: {node: '>=10'}
@@ -176,6 +204,14 @@ packages:
       client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@heroicons/react@2.1.1(react@18.2.0):
+    resolution: {integrity: sha512-JyyN9Lo66kirbCMuMMRPtJxtKJoIsXKS569ebHGGRKbl8s4CtUfLnyKJxteA+vIKySocO4s1SkTkGS4xtG/yEA==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@isaacs/cliui@8.0.2:
