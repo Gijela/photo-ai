@@ -17,7 +17,7 @@ import {
   optionsMap,
 } from "../../utils/dropdownTypes";
 import Layout from "../layout";
-import { options } from "./config";
+import { reactWidgetConfig } from "../../utils/constant";
 
 const RoomRedesign: NextPage = () => {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
@@ -106,7 +106,7 @@ const RoomRedesign: NextPage = () => {
             {/* conditional render */}
             {!originalPhoto ? (
               <UploadDropzone
-                options={options}
+                options={reactWidgetConfig}
                 onUpdate={({ uploadedFiles }) => {
                   if (uploadedFiles.length !== 0) {
                     const image = uploadedFiles[0];

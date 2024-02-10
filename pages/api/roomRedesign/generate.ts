@@ -1,32 +1,36 @@
-import { Ratelimit } from "@upstash/ratelimit";
-import redis from "../../../utils/redis";
+import { NextApiRequest, NextApiResponse } from "next";
+// import { Ratelimit } from "@upstash/ratelimit";
+// import redis from "../../../utils/redis";
 
 // Create a new ratelimiter, that allows 5 requests per 24 hours
-const ratelimit = redis
-  ? new Ratelimit({
-      redis: redis,
-      limiter: Ratelimit.fixedWindow(5, "1440 m"),
-      analytics: true,
-    })
-  : undefined;
+// const ratelimit = redis
+//   ? new Ratelimit({
+//       redis: redis,
+//       limiter: Ratelimit.fixedWindow(5, "1440 m"),
+//       analytics: true,
+//     })
+//   : undefined;
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     // Rate Limiter Code
-    if (ratelimit) {
-      const ipIdentifier =
-        req.headers["x-real-ip"] || req.connection.remoteAddress;
+    // if (ratelimit) {
+    //   const ipIdentifier =
+    //     req.headers["x-real-ip"] || req.connection.remoteAddress;
 
-      const result = await ratelimit.limit(ipIdentifier);
+    //   const result = await ratelimit.limit(ipIdentifier);
 
-      if (!result.success) {
-        res.setHeader("X-RateLimit-Limit", String(result.limit));
-        res.setHeader("X-RateLimit-Remaining", String(result.remaining));
-        return res.status(429).json({
-          error: "Too many requests in a 24-hour period.",
-        });
-      }
-    }
+    //   if (!result.success) {
+    //     res.setHeader("X-RateLimit-Limit", String(result.limit));
+    //     res.setHeader("X-RateLimit-Remaining", String(result.remaining));
+    //     return res.status(429).json({
+    //       error: "Too many requests in a 24-hour period.",
+    //     });
+    //   }
+    // }
 
     const { imageUrl, theme, room } = req.body;
 
@@ -81,7 +85,7 @@ export default async function handler(req, res) {
 }
 
 // Helper function to poll the Replicate API for results
-async function pollReplicateForImage(endpointUrl) {
+async function pollReplicateForImage(endpointUrl: string) {
   for (let attempt = 0; attempt < 60; attempt++) {
     // 1 minute timeout
     let statusResponse = await fetch(endpointUrl, {

@@ -1,13 +1,30 @@
+import { Uploader } from "uploader";
+import NSFWPredictor from "./nsfwCheck";
 import { UploadWidgetConfig } from "@bytescale/upload-widget";
 
-export const options: UploadWidgetConfig = {
+export const uploaderConfig = Uploader({
+  apiKey: !!process.env.NEXT_PUBLIC_UPLOAD_API_KEY
+    ? process.env.NEXT_PUBLIC_UPLOAD_API_KEY
+    : "free",
+});
+
+export const uploaderOptions = {
+  maxFileCount: 1,
+  mimeTypes: ["image/jpeg", "image/png", "image/jpg", "image/webp"],
+  editor: { images: { crop: false } },
+  onValidate: async (file: File): Promise<undefined | string> => {
+    let isSafe = await NSFWPredictor.isSafeImg(file);
+    return isSafe ? undefined : "文件安全检验未通过";
+  },
+};
+
+export const reactWidgetConfig: UploadWidgetConfig = {
   apiKey: !!process.env.NEXT_PUBLIC_UPLOAD_API_KEY
     ? process.env.NEXT_PUBLIC_UPLOAD_API_KEY
     : "free",
   maxFileCount: 1,
   mimeTypes: ["image/jpeg", "image/png", "image/jpg", "image/webp"],
   editor: { images: { crop: false } },
-  content: "测试",
   // styles: {
   //   colors: {
   //     primary: "#2563EB", // Primary buttons & links

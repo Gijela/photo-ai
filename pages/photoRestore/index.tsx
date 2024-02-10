@@ -8,7 +8,7 @@ import ResizablePanel from "../../components/ResizablePanel";
 import PhotoCompareSlider from "../../components/PhotoCompareSlider";
 import NumberOverview from "../../components/NumberOverview";
 import Layout from "../layout";
-import { uploaderConfig, uploaderOptions } from "./config";
+import { uploaderConfig, uploaderOptions } from "../../utils/constant";
 import BtnControl from "../../components/BtnControl";
 
 const PhotoRestore: NextPage = () => {
@@ -35,7 +35,7 @@ const PhotoRestore: NextPage = () => {
 
   return (
     <Layout headTitle="AI超人 | AI 图片修复">
-      <Row justify={"center"}>
+      <Row justify={"center"} style={{ minHeight: "28rem" }}>
         <Col
           lg={10}
           sm={20}
@@ -106,10 +106,10 @@ const PhotoRestore: NextPage = () => {
               <div className="relative">
                 <img
                   src={originalUrl}
-                  className="rounded-2xl"
+                  className="rounded-2xl w-10/12 lg:w-8/12 m-auto my-4"
                   alt="original photo"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-2xl">
+                <div className="absolute w-10/12 lg:w-8/12 m-auto inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-2xl">
                   <span className="text-white font-medium">
                     安全检测已通过，图片修复中
                     <LoadingDots color="white" style="large" />
