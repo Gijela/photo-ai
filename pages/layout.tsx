@@ -27,7 +27,7 @@ export default function Layout({ children, headTitle }: ILayout) {
       {/* Header */}
       <Row
         align={"middle"}
-        className="fixed z-50 top-0 w-screen px-3 h-14 lg:h-20 bg-white lg:bg-transparent"
+        className="fixed z-50 top-0 w-screen px-3 h-14 lg:h-20 bg-white"
       >
         <Col className="text-2xl">
           <Link

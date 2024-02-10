@@ -5,19 +5,21 @@ import {
 
 interface IPhotoSlider {
   originalUrl: string;
-  fixedUrl: string;
+  processedUrl: string;
+  compareSliderCSS?: string;
 }
 
 export default function PhotoCompareSlider({
   originalUrl,
-  fixedUrl,
+  processedUrl,
+  compareSliderCSS,
 }: IPhotoSlider) {
   return (
     <>
       <ReactCompareSlider
         itemOne={<ReactCompareSliderImage src={originalUrl} />}
-        itemTwo={<ReactCompareSliderImage src={fixedUrl} />}
-        className="flex lg:w-[475px] rounded-2xl"
+        itemTwo={<ReactCompareSliderImage src={processedUrl} />}
+        className={`rounded-2xl ${compareSliderCSS}`}
       />
     </>
   );

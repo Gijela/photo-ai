@@ -17,6 +17,12 @@ dependencies:
   '@tensorflow/tfjs':
     specifier: ^3.21.0
     version: 3.21.0(seedrandom@3.0.5)
+  '@upstash/ratelimit':
+    specifier: ^1.0.1
+    version: 1.0.1
+  '@upstash/redis':
+    specifier: ^1.28.3
+    version: 1.28.3
   antd:
     specifier: ^5.14.0
     version: 5.14.0(react-dom@18.2.0)(react@18.2.0)
@@ -702,6 +708,25 @@ packages:
     resolution: {integrity: sha512-yPwsRCecXSilYn4q5ZDD4fyI2PVyUcLimv2LQcfpV3hRyzc8t82NuWHYEYpRZa5K68zxw2RljDf30geT1vJN9g==}
     dev: false
 
+  /@upstash/core-analytics@0.0.7:
+    resolution: {integrity: sha512-lC2j5efqb1haX/fpTGaPUx1rue1WUkOZBVHDzCB7eMIVsRdFFp4xiHtyH/G9omiR1zj39fU5SCTWFiKJH3KOpw==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@upstash/redis': 1.28.3
+    dev: false
+
+  /@upstash/ratelimit@1.0.1:
+    resolution: {integrity: sha512-G9LZ7idhlkuYknbUngCB3qzd7QnkK1xDkFG5jRtEJZuOUS5UKJ0UTKbhalCtp39eX2wu2Ubv8W7HCeaJQOWM0A==}
+    dependencies:
+      '@upstash/core-analytics': 0.0.7
+    dev: false
+
+  /@upstash/redis@1.28.3:
+    resolution: {integrity: sha512-IduU0zrxVKO0z4D+usJUP/VZRYkbbbSoAdj4WYwgijjhc1nxhRZEtktZ8ueTyXT4dAatJ+gDKIIbVSVIiB1xBw==}
+    dependencies:
+      crypto-js: 4.2.0
+    dev: false
+
   /@webgpu/types@0.1.16:
     resolution: {integrity: sha512-9E61voMP4+Rze02jlTXud++Htpjyyk8vw5Hyw9FGRrmhHQg2GqbuOfwf5Klrb8vTxc2XWI3EfO7RUHMpxTj26A==}
     dev: false
@@ -1018,6 +1043,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    dev: false
 
   /cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}

@@ -32,7 +32,7 @@ export default function NumberOverview() {
           borderRadius: "2rem",
           borderWidth: "1px",
         }}
-        className="2xl:mt-6 max-w-full mx-auto h-max border-white flex items-center justify-center relative text-center flex-col lg:flex-row lg:py-10"
+        className="2xl:mt-6 max-w-full mx-auto h-max border-white flex items-center justify-center relative text-center flex-col lg:flex-row lg:py-5 my-4"
       >
         {fixedAIInfo.map((item, index) => (
           <Col key={index} className="min-w-40 w-max mx-10 px-3 mt-7 lg:mt-0">
