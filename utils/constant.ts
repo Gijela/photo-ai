@@ -41,3 +41,14 @@ export const reactWidgetConfig: UploadWidgetConfig = {
   //   },
   // },
 };
+
+export const navbarConfig = [
+  {
+    name: "AI 图片修复",
+    route: "/photoRestore",
+  },
+  {
+    name: "AI 室内设计师",
+    route: "/roomRedesign",
+  },
+];
