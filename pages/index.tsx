@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import Layout from "./layout";
+import PhotoRestore from "./photoRestore";
 
 const Home: NextPage = () => {
-  return <Layout>home</Layout>;
+  return <PhotoRestore />;
 };
 
 export default Home;
