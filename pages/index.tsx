@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import PhotoRestore from "./photoRestore";
+import ChatGPT from "./chatgpt";
 
 const Home: NextPage = () => {
-  return <PhotoRestore />;
+  return <ChatGPT />;
 };
 
 export default Home;

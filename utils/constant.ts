@@ -44,6 +44,10 @@ export const reactWidgetConfig: UploadWidgetConfig = {
 
 export const navbarConfig = [
   {
+    name: "ChatGPT",
+    route: "/chatgpt",
+  },
+  {
     name: "AI 图片修复",
     route: "/photoRestore",
   },
