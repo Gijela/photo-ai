@@ -40,14 +40,18 @@ export default function Layout({ children, headTitle }: ILayout) {
       {/* Header */}
       <Row
         align={"middle"}
-        className="fixed z-50 top-0 w-screen px-3 h-14 lg:h-20 bg-slate-50"
+        className="fixed z-50 top-0 w-screen px-3 h-12 lg:h-16 bg-slate-50"
       >
         <Col className="text-2xl">
           <Link
             href="/"
             className="flex items-center text-blue-600 font-extrabold"
           >
-            <img src="/favicon.png" alt="favicon" className="w-12 h-12" />
+            <img
+              src="/favicon.png"
+              alt="favicon"
+              className="w-10 h-10 lg:w-12 lg:h-12"
+            />
             <span className="hidden lg:inline ml-1">AI 超人</span>
           </Link>
         </Col>
@@ -55,10 +59,12 @@ export default function Layout({ children, headTitle }: ILayout) {
           {navbarConfig.map((navbar, idx) => (
             <Link
               key={idx}
-              className="ml-8 hover:text-blue-600"
+              className={`ml-8 hover:text-blue-600 ${
+                navbar.route === "/chatgpt" ? "text-red-600" : ""
+              }`}
               href={navbar.route}
             >
-              {navbar.name}
+              {`${navbar.route === "/chatgpt" ? "🔥" : ""} ${navbar.name}`}
             </Link>
           ))}
         </Col>
@@ -83,7 +89,7 @@ export default function Layout({ children, headTitle }: ILayout) {
         </Col>
       </Row>
 
-      <main className="min-h-screen mx-auto flex flex-col pt-14 lg:pt-20">
+      <main className="min-h-screen mx-auto flex flex-col pt-12 lg:pt-16">
         {children}
       </main>
     </div>
